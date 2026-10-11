@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>North Carolina and the Kansas Question</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #f2f4f6;
+  --surface: #ffffff;
+  --ink: #15222d;
+  --muted: #55656f;
+  --line: #d3dae0;
+  --cut: #b42a1f;      /* revenue going out / shortfalls */
+  --cut-soft: #f6dcd8;
+  --have: #1e5f74;     /* what exists today */
+  --have-soft: #d6e7ec;
+  --hero-bg: #15222d;
+  --hero-ink: #f2f4f6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #17222b; --ink: #e8edf1; --muted: #9aabb6; --line: #2a3a46;
+    --cut: #ff7a6b; --cut-soft: #3b1f1d; --have: #6cc0d9; --have-soft: #1b3440;
+    --hero-bg: #0a1117; --hero-ink: #e8edf1;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #17222b; --ink: #e8edf1; --muted: #9aabb6; --line: #2a3a46;
+  --cut: #ff7a6b; --cut-soft: #3b1f1d; --have: #6cc0d9; --have-soft: #1b3440;
+  --hero-bg: #0a1117; --hero-ink: #e8edf1;
+}
+html { height: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  font-size: 1.125rem; line-height: 1.7;
+}
+*, *::before, *::after { box-sizing: inherit; }
+h1, h2, h3, .sans {
+  font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+}
+a { color: var(--have); }
+:focus-visible { outline: 3px solid var(--have); outline-offset: 2px; }
+
+/* HERO */
+.hero { background: var(--hero-bg); color: var(--hero-ink); padding: 4rem 1.25rem 3rem; }
+.hero-inner { max-width: 1040px; margin: 0 auto; }
+.hero h1 {
+  font-size: clamp(2.4rem, 7vw, 5rem); line-height: 1.02; font-weight: 800;
+  letter-spacing: -0.025em; margin: 0 0 1.25rem; max-width: 14ch;
+}
+.hero .dek { font-size: 1.25rem; max-width: 36rem; color: color-mix(in srgb, var(--hero-ink) 80%, transparent); margin: 0 0 2.5rem; }
+.chart-card { background: color-mix(in srgb, var(--hero-ink) 6%, transparent); border: 1px solid color-mix(in srgb, var(--hero-ink) 18%, transparent); border-radius: 6px; padding: 1.25rem 1rem 1rem; }
+.chart-card h2 { font-size: 1.05rem; margin: 0 0 .25rem 0.25rem; font-weight: 700; }
+.chart-card p.cap { font-size: .9rem; margin: 0 0 .5rem .25rem; color: color-mix(in srgb, var(--hero-ink) 70%, transparent); line-height: 1.4; }
+.chart-scroll { overflow-x: auto; }
+.chart-scroll svg { display: block; min-width: 560px; width: 100%; height: auto; }
+.chart-scroll text { font-family: "Bricolage Grotesque", Arial, sans-serif; fill: var(--hero-ink); font-size: 13px; }
+.chart-scroll .axis { stroke: color-mix(in srgb, var(--hero-ink) 35%, transparent); stroke-width: 1; }
+.chart-scroll .grid { stroke: color-mix(in srgb, var(--hero-ink) 12%, transparent); stroke-width: 1; }
+.chart-scroll .step { fill: none; stroke: #ff8a7a; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+.chart-scroll .dot { fill: #ff8a7a; }
+.chart-scroll .faint { fill: color-mix(in srgb, var(--hero-ink) 65%, transparent); }
+.chart-scroll .lbl { font-weight: 700; font-size: 14px; }
+
+/* LAYOUT */
+main { padding: 0 1.25rem; }
+section { max-width: 700px; margin: 0 auto; padding: 3.5rem 0 0; }
+section.wide { max-width: 1040px; }
+section > h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.15; letter-spacing: -0.015em; margin: 0 0 1rem; font-weight: 800; }
+section p { margin: 0 0 1.1rem; }
+.prose { max-width: 700px; }
+h3 { font-size: 1.25rem; margin: 2.2rem 0 .5rem; font-weight: 700; }
+
+/* KANSAS FACTS */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0; margin: 1.75rem 0 0; border-top: 3px solid var(--ink); }
+.fact { padding: 1rem 1rem 1.1rem 0; border-bottom: 1px solid var(--line); }
+.fact b { display: block; font-family: "Bricolage Grotesque", Arial, sans-serif; font-size: 2rem; line-height: 1.1; color: var(--cut); font-weight: 800; }
+.fact span { font-size: .95rem; color: var(--muted); line-height: 1.4; display: block; margin-top: .25rem; }
+
+/* BARS */
+.bars { margin: 1.5rem 0 1.75rem; }
+.bar-row { display: grid; grid-template-columns: 8.5rem 1fr; gap: .75rem; align-items: center; margin: .5rem 0; font-family: "Bricolage Grotesque", Arial, sans-serif; font-size: .95rem; }
+.track { background: var(--line); height: 1.6rem; border-radius: 3px; position: relative; overflow: hidden; }
+.fill { height: 100%; background: var(--have); display: flex; align-items: center; justify-content: flex-end; padding-right: .5rem; color: #fff; font-weight: 700; font-size: .85rem; min-width: 3rem; white-space: nowrap; }
+.fill.cut { background: var(--cut); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .fill { color: #0a1117; } }
+:root[data-theme="dark"] .fill { color: #0a1117; }
+.bars-title { font-family: "Bricolage Grotesque", Arial, sans-serif; font-weight: 700; font-size: 1rem; margin: 1.75rem 0 0; }
+.bars-note { font-size: .9rem; color: var(--muted); margin: .25rem 0 0; line-height: 1.45; }
+@media (max-width: 520px) { .bar-row { grid-template-columns: 1fr; gap: .2rem; } }
+
+/* INFRA GRADES */
+.grades { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0 .5rem; }
+.grade { border: 1px solid var(--line); background: var(--surface); padding: 1rem; border-radius: 4px; }
+.grade strong { font-family: "Bricolage Grotesque", Arial, sans-serif; font-size: 2.4rem; line-height: 1; display: block; font-weight: 800; }
+.grade span { font-size: .95rem; color: var(--muted); }
+.grade.low strong { color: var(--cut); }
+
+/* CALLOUTS / FEDERAL */
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--cut); padding: 1.4rem 1.4rem .6rem; border-radius: 4px; }
+.panel h3 { margin-top: 0; }
+.panel p { font-size: 1.02rem; line-height: 1.6; }
+.panel .big { font-family: "Bricolage Grotesque", Arial, sans-serif; font-weight: 800; font-size: 2.2rem; color: var(--cut); line-height: 1.05; display: block; }
+.panel .big small { display: block; font-size: .9rem; font-weight: 500; color: var(--muted); margin-top: .2rem; }
+
+.lede-box { background: var(--cut-soft); border-left: 5px solid var(--cut); padding: 1.25rem 1.5rem; margin: 2rem 0 0; border-radius: 0 4px 4px 0; }
+.lede-box p { margin: 0 0 .8rem; }
+.lede-box p:last-child { margin: 0; }
+
+/* SOURCES */
+.sources { max-width: 700px; margin: 0 auto; padding: 3.5rem 0 4rem; }
+.sources > h2 { font-size: 1.5rem; margin: 0 0 1rem; font-weight: 800; }
+details { border-top: 1px solid var(--line); padding: .75rem 0; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; font-family: "Bricolage Grotesque", Arial, sans-serif; font-weight: 700; font-size: 1.02rem; }
+details ul { margin: .75rem 0 .25rem; padding-left: 1.2rem; font-size: .98rem; line-height: 1.5; color: var(--muted); }
+details li { margin: .3rem 0; }
+details li a { color: var(--have); }
+details li a.find { font-family: "Bricolage Grotesque", Arial, sans-serif; font-size: .85rem; margin-left: .35rem; white-space: nowrap; }
+.asof { font-size: .95rem; color: var(--muted); font-style: italic; margin-top: 1.5rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1>North Carolina and the Kansas question</h1>
+    <p class="dek">Kansas cut income taxes and the bills kept coming. North Carolina is now cutting on a fixed schedule while aging infrastructure and federal cost shifts press in from several directions.</p>
+
+    <div class="chart-card">
+      <h2>North Carolina's scheduled personal income tax rate, 2026&ndash;2034</h2>
+      <p class="cap">Under S.B. 257, signed July 7, 2026. The rate falls from 3.99% to 2.99% on an automatic schedule.</p>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 640 270" role="img" aria-label="Step chart. 3.99 percent in 2026, 3.49 percent for 2027 through 2029, 3.24 percent for 2030 through 2032, 2.99 percent for 2033 and 2034.">
+          <line class="grid" x1="50" x2="590" y1="41.2" y2="41.2"/>
+          <line class="grid" x1="50" x2="590" y1="101.2" y2="101.2"/>
+          <line class="grid" x1="50" x2="590" y1="131.2" y2="131.2"/>
+          <line class="grid" x1="50" x2="590" y1="161.2" y2="161.2"/>
+          <line class="axis" x1="50" x2="590" y1="220" y2="220"/>
+          <path class="step" d="M50 41.2 H110 V101.2 H290 V131.2 H470 V161.2 H590"/>
+          <circle class="dot" cx="50" cy="41.2" r="5"/>
+          <circle class="dot" cx="110" cy="101.2" r="5"/>
+          <circle class="dot" cx="290" cy="131.2" r="5"/>
+          <circle class="dot" cx="470" cy="161.2" r="5"/>
+          <text class="lbl" x="58" y="31">3.99%</text>
+          <text class="lbl" x="118" y="91">3.49%</text>
+          <text class="lbl" x="298" y="121">3.24%</text>
+          <text class="lbl" x="478" y="151">2.99%</text>
+          <text class="faint" x="50" y="242" text-anchor="start">2026</text>
+          <text class="faint" x="110" y="242" text-anchor="start">2027</text>
+          <text class="faint" x="290" y="242" text-anchor="start">2030</text>
+          <text class="faint" x="470" y="242" text-anchor="start">2033</text>
+          <text class="faint" x="590" y="242" text-anchor="end">2034</text>
+          <text class="faint" x="590" y="262" text-anchor="end" style="font-size:12px">Up to two more cuts possible 2035&ndash;2040 if revenue thresholds are met</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="kansas">
+  <h2>What happened in Kansas</h2>
+  <div class="prose">
+    <p>In 2012, Kansas Governor Sam Brownback signed sweeping income tax cuts, calling them a &ldquo;real live experiment&rdquo; to see whether lower taxes would stimulate the economy enough to produce more revenue. The plan erased the top income tax bracket and lowered rates across the board, and it exempted income from pass-through businesses like LLCs. Brownback argued the cuts would pay for themselves.</p>
+    <p><strong>They didn&rsquo;t.</strong></p>
+    <p>According to the Kansas experiment entry on Wikipedia, growth generated only enough new revenue to offset 10 to 30 percent of most of the initial tax cut, which forced spending cuts to avoid deficits. Tax revenue consistently came in below expectations. The state Supreme Court ruled that lawmakers had to increase school funding, and one account says $1.9 billion was diverted from highway improvements between 2012 and 2017 to plug the hole left by falling income tax collections.</p>
+  </div>
+  <div class="facts">
+    <div class="fact"><b>10&ndash;30%</b><span>of most of the initial tax cut was offset by new growth</span></div>
+    <div class="fact"><b>$900M</b><span>revenue shortfall</span></div>
+    <div class="fact"><b>2014 &amp; 2016</b><span>S&amp;P credit rating downgrades</span></div>
+    <div class="fact"><b>$1.9B</b><span>diverted from highway improvements, 2012&ndash;2017 (one account)</span></div>
+  </div>
+  <div class="prose" style="margin-top:1.75rem">
+    <p>In 2017, a Republican-led legislature repealed most of the cuts with bipartisan supermajorities, overriding Brownback&rsquo;s veto.</p>
+  </div>
+</section>
+
+<section id="nc-taxes">
+  <h2>North Carolina&rsquo;s version</h2>
+  <div class="prose">
+    <p>North Carolina&rsquo;s approach is slower and more cautious on paper, but it points the same direction. The flat individual rate is 3.99% in 2026. On July 7, 2026, Governor Stein signed S.B. 257, which progressively lowers the personal income tax rate from 3.99% to 2.99% over seven years: 3.49% for 2027 through 2029, 3.24% for 2030 through 2032, and 2.99% for 2033 and 2034.</p>
+    <p>The law repeals the earlier revenue-trigger cuts for those years and replaces them with an automatic schedule. After the rate reaches 2.99%, it authorizes up to two additional reductions between 2035 and 2040 if revenue thresholds are met.</p>
+    <p>The corporate side has gone even further. North Carolina has a flat 2 percent corporate income tax rate, one of the lowest in the nation and scheduled to phase down further. By law, the state will phase out the corporate income tax completely by 2030.</p>
+  </div>
+  <p class="bars-title">Corporate income tax rate</p>
+  <div class="bars" role="group" aria-label="Corporate income tax rates">
+    <div class="bar-row"><span>North Carolina, 2026</span><div class="track"><div class="fill" style="width:30.8%">2%</div></div></div>
+    <div class="bar-row"><span>North Carolina, 2030</span><div class="track"><div class="fill" style="width:0;min-width:7.5rem;justify-content:flex-start;padding-left:.5rem">0% (phase-out)</div></div></div>
+    <div class="bar-row"><span>South Carolina</span><div class="track"><div class="fill cut" style="width:76.9%">5.00%</div></div></div>
+    <div class="bar-row"><span>Georgia</span><div class="track"><div class="fill cut" style="width:78.3%">5.09%</div></div></div>
+    <div class="bar-row"><span>Virginia</span><div class="track"><div class="fill cut" style="width:92.3%">6%</div></div></div>
+    <div class="bar-row"><span>Tennessee</span><div class="track"><div class="fill cut" style="width:100%">6.5%</div></div></div>
+  </div>
+  <p class="bars-note" style="margin:-1rem 0 1.5rem">Tennessee&rsquo;s rate is its excise tax on net earnings; it also levies a separate franchise tax on net worth. North Carolina&rsquo;s 2030 bar shows the scheduled elimination of its corporate income tax.</p>
+  <div class="prose">
+    <p>North Carolina isn&rsquo;t just competitive with its neighbors on corporate tax. It&rsquo;s already well below them.</p>
+  </div>
+</section>
+
+<section id="invest">
+  <h2>What the state isn&rsquo;t investing in</h2>
+  <div class="prose">
+    <p>The cuts are landing in a state that already invests little in its public schools. The National Education Association ranks North Carolina 46th in the nation for average teacher pay, and it was the only state where teacher pay was projected to drop this year. The latest budget includes an average 8% raise for teachers, but starting pay remains below the national average.</p>
+  </div>
+  <p class="bars-title">Per-student spending</p>
+  <div class="bars" role="group" aria-label="Per-student spending">
+    <div class="bar-row"><span>North Carolina</span><div class="track"><div class="fill cut" style="width:72%">$13,680</div></div></div>
+    <div class="bar-row"><span>National average</span><div class="track"><div class="fill" style="width:100%">nearly $19,000</div></div></div>
+  </div>
+  <p class="bars-note">North Carolina&rsquo;s per-student spending is lower than every neighboring state except Tennessee.</p>
+</section>
+
+<section id="infrastructure">
+  <h2>Roads, bridges and dams</h2>
+  <div class="prose">
+    <p>The physical infrastructure tells a similar story. The American Society of Civil Engineers gave North Carolina&rsquo;s infrastructure an overall C- in its January 2026 report card.</p>
+  </div>
+  <div class="grades">
+    <div class="grade"><strong>C-</strong><span>Overall</span></div>
+    <div class="grade"><strong>C-</strong><span>Roads and bridges</span></div>
+    <div class="grade low"><strong>D+</strong><span>Dams</span></div>
+  </div>
+
+  <div class="prose">
+    <h3>Dams</h3>
+    <p>North Carolina has 7,448 dams, and the report estimates a funding gap of about $5.97 billion to maintain and repair those not rated satisfactory. Nearly half of that, $2.83 billion, is needed for high-hazard dams, the ones where a failure would threaten lives downstream. Hurricane Helene damaged more than 40 dams in the western part of the state, and many communities are still waiting for repairs or replacements.</p>
+  </div>
+  <p class="bars-title">Dam funding gap</p>
+  <div class="bars" role="group" aria-label="Dam funding gap">
+    <div class="bar-row"><span>All dams not rated satisfactory</span><div class="track"><div class="fill cut" style="width:100%">$5.97B</div></div></div>
+    <div class="bar-row"><span>High-hazard dams</span><div class="track"><div class="fill cut" style="width:47.4%">$2.83B</div></div></div>
+  </div>
+
+  <div class="prose">
+    <h3>Bridges</h3>
+    <p>State bridge funding has grown from $150 million in FY2015 to $482 million in FY2025, but more than 4,800 bridges are over 50 years old, and over 6,300 are expected to be by 2035. Bridge funding needs are projected to reach $961 million by FY2027, leaving a $479 million shortfall that keeps widening.</p>
+  </div>
+  <p class="bars-title">Bridge funding</p>
+  <div class="bars" role="group" aria-label="Bridge funding">
+    <div class="bar-row"><span>FY2015 funding</span><div class="track"><div class="fill" style="width:15.6%">$150M</div></div></div>
+    <div class="bar-row"><span>FY2025 funding</span><div class="track"><div class="fill" style="width:50.2%">$482M</div></div></div>
+    <div class="bar-row"><span>Projected need, FY2027</span><div class="track"><div class="fill cut" style="width:100%">$961M</div></div></div>
+  </div>
+  <div class="prose">
+    <p>The replacement of the Cape Fear Memorial Bridge is estimated to cost more than $1 billion. And the State is proposing tolls to pay for the lion&rsquo;s share of the construction cost.</p>
+
+    <h3>Roads</h3>
+    <p>Nearly two-thirds of state roads are rated only &ldquo;fair.&rdquo; A report to lawmakers found that the statewide road score of 83 remains in the good range, but the most-trafficked roads are deteriorating. The same report said the maintenance budget would need to increase by more than 159% by 2030 to keep roads up. The gas tax, a primary funding source, is declining as more drivers switch to hybrid and electric vehicles.</p>
+    <p>Much of the recent progress came from Washington, not Raleigh. The federal Infrastructure Investment and Jobs Act has provided $12.3 billion to projects statewide, helping close longstanding gaps. That federal money is a one-time boost, not a permanent funding stream.</p>
+  </div>
+</section>
+
+<section id="federal" class="wide">
+  <div style="max-width:700px;margin:0 auto">
+    <h2 style="font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.15;letter-spacing:-0.015em;margin:0 0 1rem;font-weight:800">The federal squeeze</h2>
+    <p>The tax cuts aren&rsquo;t happening in a vacuum. The One Big Beautiful Bill Act is shifting costs onto North Carolina just as state revenue is being dialed back.</p>
+  </div>
+
+  <div class="pair">
+    <div class="panel">
+      <h3>SNAP</h3>
+      <span class="big">75%<small>of administrative costs now paid by states, up from half</small></span>
+      <p style="margin-top:1rem">North Carolina is one of just ten states where counties administer the program, so the bill lands on county budgets.</p>
+      <p>The state&rsquo;s county commissioners estimate <strong>$52 million</strong> in additional costs this fiscal year and about <strong>$69 million</strong> annually starting in 2027.</p>
+      <p>Beyond administration, states with SNAP error rates above 6% must begin paying 5% to 15% of benefit costs starting in October 2027. North Carolina had an error rate above 10% in 2024, which would put it in the 15% tier.</p>
+      <p>Small, poor counties have the least room to absorb it. Bladen County faces more than $397,000 in new administrative costs.</p>
+      <p>Even towns and cities that do not administer SNAP will lose revenue, as the overall sales tax distribution to the county will be reduced by the State of North Carolina.</p>
+    </div>
+    <div class="panel">
+      <h3>Medicaid</h3>
+      <span class="big">~$50B<small>in federal funding lost over 10 years, by one analysis</small></span>
+      <p style="margin-top:1rem">State officials estimate more than <strong>255,000</strong> North Carolinians could lose coverage under the new work requirement, many because of paperwork rather than unemployment.</p>
+      <p>The law also limits the provider taxes the state uses to fund its share of expansion, which analysts warn could trip the state&rsquo;s own trigger law and end Medicaid expansion for roughly <strong>670,000</strong> people.</p>
+      <p>NCDHHS says administration alone will cost the state an additional <strong>$44.4 million</strong> a year.</p>
+    </div>
+  </div>
+</section>
+
+<section id="question">
+  <h2>Why this is the Kansas question again</h2>
+  <div class="prose">
+    <p>Kansas didn&rsquo;t fail because of one bad tax cut. It failed because the revenue went away and the bills didn&rsquo;t.</p>
+  </div>
+  <div class="lede-box">
+    <p>North Carolina now faces the same arithmetic from several directions at once: automatic state revenue reductions on a fixed schedule, deferred maintenance on aging bridges and dams, and federal changes that push more of the cost of food assistance and health care down to the state and its counties.</p>
+    <p><strong>When the next lean year arrives, the squeeze will fall on the same places it fell in Kansas: schools, roads, and local services, in a state already near the bottom on education funding.</strong></p>
+  </div>
+</section>
+
+<div class="sources" id="sources">
+  <h2>Sources</h2>
+  <details>
+    <summary>Kansas background</summary>
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Kansas_experiment" target="_blank" rel="noopener noreferrer">Wikipedia: Kansas experiment</a></li>
+      <li><a href="https://www.bondbuyer.com/news/kansas-lawmakers-end-brownback-tax-cut-experiment-with-veto-override" target="_blank" rel="noopener noreferrer">The Bond Buyer: Kansas lawmakers end Brownback tax cut &ldquo;experiment&rdquo; with veto override</a></li>
+      <li><a href="https://www.bondbuyer.com/location/kansas?offset=120" target="_blank" rel="noopener noreferrer">The Bond Buyer: Kansas coverage archive (S&amp;P downgrade, school funding ruling, revenue shortfalls)</a></li>
+      <li><a href="https://fullsite.motherjones.com/?p=406105" target="_blank" rel="noopener noreferrer">Mother Jones: Kansas ends its trickle-down experiment</a></li>
+      <li><a href="https://apnews.com/article/e4f794cd96cb488cb04ab1cd48b1458d" target="_blank" rel="noopener noreferrer">Kansas Legislators Repudiate Governor by Overriding Tax Veto</a></li>
+      <li><a href="https://www.newsfromthestates.com/node/427343" target="_blank" rel="noopener noreferrer">Kansas Reflector via States Newsroom: Ty Masterson shares with Sam Brownback the stigma of Kansas&rsquo; failed tax experiment</a> (opinion column)</li>
+      <li><a href="https://angrybearblog.com/?p=40212" target="_blank" rel="noopener noreferrer">Angry Bear: Kansas Republicans abandon Brownback; raise taxes over his veto</a> (blog)</li>
+    </ul>
+  </details>
+  <details>
+    <summary>NC income tax cuts and revenue forecast</summary>
+    <ul>
+      <li><a href="https://www.ednc.org/3-24-2026-nc-forecasts-budget-surplus-over-next-two-years-warns-tax-cuts-could-impact-future-revenue/" target="_blank" rel="noopener noreferrer">EdNC: NC forecasts budget surplus, but warns tax cuts could impact future revenue</a></li>
+      <li><a href="https://taxnews.ey.com/news/2026-1630-north-carolina-law-progressively-lowers-personal-income-tax-rate-over-several-years" target="_blank" rel="noopener noreferrer">EY Tax News: North Carolina law progressively lowers personal income tax rate over several years</a></li>
+      <li><a href="https://www.kiplinger.com/taxes/north-carolina-income-tax-cut-coming" target="_blank" rel="noopener noreferrer">Kiplinger: Your North Carolina Income Tax Cut Is Coming, But There&rsquo;s a Catch</a></li>
+      <li><a href="https://www.cpapracticeadvisor.com/2026/08/31/how-north-carolinas-income-tax-rate-compares-to-its-neighbor-states-as-voters-consider-cap/189319/" target="_blank" rel="noopener noreferrer">CPA Practice Advisor: How North Carolina&rsquo;s Income Tax Rate Compares to Its Neighbor States</a></li>
+      <li><a href="https://nsjonline.com/?p=104491" target="_blank" rel="noopener noreferrer">NSJ Online: Upgraded revenue forecast shows state surplus</a></li>
+      <li><a href="https://ncchamber.com/2026/01/14/north-carolina-state-tax-and-budget-developments/" target="_blank" rel="noopener noreferrer">NC Chamber: State Tax and Budget Developments</a></li>
+    </ul>
+  </details>
+  <details>
+    <summary>Corporate tax comparison</summary>
+    <ul>
+      <li><a href="https://taxfoundation.org/data/all/state/state-corporate-income-tax-rates-brackets/" target="_blank" rel="noopener noreferrer">Tax Foundation: 2026 State Corporate Income Tax Rates and Brackets</a></li>
+      <li><a href="https://taxfoundation.org/location/north-carolina/page/3/" target="_blank" rel="noopener noreferrer">Tax Foundation: How Do North Carolina Taxes Compare to Other States?</a></li>
+      <li><a href="https://njbia.org/research-on-2026-corporate-tax-rates-shows-nj-retains-highest-in-us/" target="_blank" rel="noopener noreferrer">NJBIA: Research on 2026 corporate tax rates</a></li>
+      <li><a href="https://taxfoundation.org/location/south-carolina/" target="_blank" rel="noopener noreferrer">Tax Foundation: 2026 South Carolina Tax Rates, Collections, and Burdens</a></li>
+      <li><a href="https://taxfoundation.org/location/Tennessee/" target="_blank" rel="noopener noreferrer">Tax Foundation: 2026 Tennessee Tax Rates, Collections, and Burdens</a></li>
+    </ul>
+  </details>
+  <details>
+    <summary>Teacher pay and education spending</summary>
+    <ul>
+      <li><a href="https://ncnewsline.com/2026/04/27/north-carolina-teacher-pay-projected-to-decline-ranking-46th-nationwide/" target="_blank" rel="noopener noreferrer">NC Newsline: NC teacher pay projected to decline, ranking 46th</a></li>
+      <li><a href="https://www.wunc.org/education/2026-04-27/nc-falls-46th-teacher-pay-national-ranking" target="_blank" rel="noopener noreferrer">WUNC: NC falls to 46th in teacher pay in national ranking</a></li>
+      <li><a href="https://www.ncae.org/about-ncae/media-center/press-releases/north-carolina-falls-again-educator-pay-rankings" target="_blank" rel="noopener noreferrer">NCAE: North Carolina Falls Again in Educator Pay Rankings</a></li>
+      <li><a href="https://abc11.com/post/nc-ranked-worst-states-teachers-new-report-says/19858701/" target="_blank" rel="noopener noreferrer">ABC11: NC ranked as one of worst states for teachers</a></li>
+    </ul>
+  </details>
+  <details>
+    <summary>Roads, bridges and dams</summary>
+    <ul>
+      <li><a href="https://infrastructurereportcard.org/north-carolina-infrastructure-report-card-2026/" target="_blank" rel="noopener noreferrer">ASCE: North Carolina&rsquo;s 2026 Infrastructure Report Card</a></li>
+      <li><a href="https://www.infrastructurereportcard.org/state-item/north-carolina" target="_blank" rel="noopener noreferrer">ASCE: North Carolina state page</a></li>
+      <li><a href="https://www.wunc.org/term/news/2026-01-27/north-carolina-infrastructure-report-card-2026" target="_blank" rel="noopener noreferrer">WUNC: Civil engineers give NC infrastructure a C-minus</a></li>
+      <li><a href="https://portcitydaily.com/local-news/2025/03/07/ncdot-will-need-hundreds-of-millions-in-additional-funding-each-year-to-maintain-highways/" target="_blank" rel="noopener noreferrer">Port City Daily: NCDOT will need hundreds of millions in additional funding each year</a></li>
+    </ul>
+  </details>
+  <details>
+    <summary>SNAP cost shift</summary>
+    <ul>
+      <li><a href="https://ncnewsline.com/?p=195226" target="_blank" rel="noopener noreferrer">NC Newsline: NC counties now paying more to help feed hungry people</a></li>
+      <li><a href="https://wlos.com/news/local/snap-medicaid-federal-changes-county-assistance-north-carolina-western-nc-wnc-pisgah-legal-services-noncitizens-community" target="_blank" rel="noopener noreferrer">WLOS: Federal changes to SNAP, Medicaid take effect Oct. 1 in NC</a></li>
+      <li><a href="https://www.northcarolinahealthnews.org/?p=66715" target="_blank" rel="noopener noreferrer">NC Health News: Bladen County and SNAP administrative costs</a></li>
+      <li><a href="https://www.wunc.org/politics/2026-01-13/new-work-requirements-medicaid-snap-cost-nc-millions" target="_blank" rel="noopener noreferrer">WUNC: New work requirements for Medicaid, SNAP will cost NC millions</a></li>
+    </ul>
+  </details>
+  <details>
+    <summary>Medicaid cuts</summary>
+    <ul>
+      <li><a href="https://www.northcarolinahealthnews.org/2025/07/10/big-beautiful-bill-impacts/" target="_blank" rel="noopener noreferrer">NC Health News: How the Big Beautiful Bill impacts NC</a></li>
+      <li><a href="https://ncnewsline.com/2025/09/05/expenses-shifted-to-the-states-for-food-benefits-and-health-insurance-will-cost-nc-billions/" target="_blank" rel="noopener noreferrer">NC Newsline: Expenses shifted to the states will cost NC billions</a></li>
+      <li><a href="https://ncnewsline.com/2026/01/13/trump-medicaid-reform-will-cost-nc-tens-of-millions-a-year-say-state-medicaid-leaders/" target="_blank" rel="noopener noreferrer">NC Newsline: Medicaid reform will cost NC tens of millions a year</a></li>
+      <li><a href="https://www.axios.com/local/raleigh/2025/07/01/north-carolina-medicaid-cuts-big-beautiful-bill?stream=top" target="_blank" rel="noopener noreferrer">Axios Raleigh: Hundreds of thousands in NC at risk of losing coverage</a></li>
+    </ul>
+  </details>
+
+  <p class="asof">Figures reflect reporting as of October 2026.</p>
+</div>
+
+</main>
+</body>
+</html>
